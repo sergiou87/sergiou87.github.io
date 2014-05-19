@@ -1,0 +1,10 @@
+# Site settings
+title: Sergio Padrino
+# email: your-email@domain.com
+description: "A blog about iOS development"
+baseurl: ""
+url: "http://sergiou87.github.io"
+
+# Build settings
+markdown: kramdown
+permalink: pretty
