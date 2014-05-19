@@ -1,10 +1,23 @@
-# Site settings
-title: Sergio Padrino
-# email: your-email@domain.com
-description: "A blog about iOS development"
-baseurl: ""
-url: "http://sergiou87.github.io"
+# Dependencies
+markdown:         redcarpet
+pygments:         true
 
-# Build settings
-markdown: kramdown
-permalink: pretty
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Sergio Padrino
+tagline:          'A blog about iOS development'
+description:      "In this blog I'll write about my work as an iOS developer."
+url:              http://sergiou87.github.io
+
+author:
+  name:           'Sergio Padrino'
+  url:            https://twitter.com/sergiou87
+
+paginate:         5
+
+# Custom vars
+github:           https://github.com/sergiou87
+linkedin:         https://www.linkedin.com/profile/view?id=161276523
+twitter:          https://twitter.com/sergiou87
