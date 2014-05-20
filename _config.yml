@@ -2,6 +2,12 @@
 markdown:         redcarpet
 pygments:         true
 
+# Analytics
+analytics :
+  provider : google
+  google :
+      tracking_id : 'UA-6856454-4'
+
 # Permalinks
 permalink:        pretty
 
