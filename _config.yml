@@ -4,9 +4,8 @@ pygments:         true
 
 # Analytics
 analytics :
-  provider : google
-  google :
-      tracking_id : 'UA-6856454-4'
+  tracking_id :   'UA-6856454-4'
+  site_name:      'sergiou87.github.io'
 
 # Permalinks
 permalink:        pretty
