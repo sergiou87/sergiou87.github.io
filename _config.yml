@@ -11,6 +11,8 @@ analytics :
 permalink:        pretty
 
 # Setup
+excerpt_separator: <!--more-->
+
 title:            'Sergio Padrino'
 tagline:          'A blog about iOS development'
 description:      "In this blog I'll write about my work and thoughts as iOS developer."

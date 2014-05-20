@@ -9,6 +9,8 @@ Dependency Injection is not a complex concept.
 
 When you use DI, your business logic classes don't instantiate the objects they need, and they don't access to singleton instances either. They ask in their constructors (preferably) for the objects they need.
 
+<!--more-->
+
 ## The problem
 Imagine a class that broadcasts messages (**FVBroadcaster**) to all friends of the current user. This system offers you a clear interface to send a message:
 
