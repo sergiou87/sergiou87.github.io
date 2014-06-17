@@ -60,7 +60,7 @@ Let's see how to implement a _provider_ for ``SPTwitterMessageSendCommand``:
 
 @end
 
-@implementation SPTwitterMessageSender
+@implementation SPTwitterMessageSendCommandProvider
 
 - (SPTwitterMessageSendCommand *)command
 {
