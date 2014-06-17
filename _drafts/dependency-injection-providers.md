@@ -11,8 +11,15 @@ But there is a special kind of dependency: sometimes a class ``A`` needs to crea
 
 <!--more-->
 
-- Problem: we cannot (should/must not) override ``alloc`` implementation so that we can replace the created instances with mocks
-- Another problem: if ``B`` has dependencies, ``A`` should also have them so that they can be passed to ``B``… this doesn't scale!!!!
+One approach would be overriding/swizzling somehow the ``alloc`` method of ``B`` in our tests: we leave the original implementation for our production code, but we stub the alloc method to return our mock on tests.
+
+However, even if we managed to make this work, we would have to face another problem: class ``B`` may have other dependencies. If this is the case… should ``A`` receive all the dependencies of ``B`` so that they can be injected into ``B``? That would mean making ``A`` depend on stuff that it doesn't need.
+
+Therefore, if we discard replacing the implementation of ``alloc`` and we don't want to propagate our dependencies through our classes, we only can abstract object instantiation using _providers_.
+
+A _provider_ is just an intermediate class whose purpose is instantiating objects. That means that it's also its duty to store and inject the dependencies of the created objects.
+
+
 
 - Solution: intermediate class whose purpose is instantiating objects
 
