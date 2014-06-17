@@ -91,10 +91,25 @@ Now let's see how it's used in ``SPTwitterMessageSender``:
 
 @end
 ```
+Now ``SPTwitterMessageSender`` depends only on the _provider_ and not on ``SPTwitterMessageSendCommand`` dependencies.
 
+If we want to test if a command is executed, we can write it like this:
+```objective-c
+- (void)testSendMessageShouldExecuteCommand
+{
+    // Given
+    SPTwitterMessageSendCommand *mockCommand = mock(SPTwitterMessageSendCommand);
+    SPTwitterMessageSendCommandProvider *mockProvider = mock(SPTwitterMessageSendCommandProvider);
 
-- Solution: intermediate class whose purpose is instantiating objects
+    [[[mockProvider shouldReceive] command] andReturn:mockCommand];
 
-- Example of a unit test that injects mocks through a mocked provider.
+    SPTwitterMessageSender *sut = [[SPTwitterMessageSender alloc] initWithTwitterMessageSendCommandProvider:mockProvider];
 
-- The example could consist of an implementation of FVTwitterMessageSending that create a FVTwitterMessageSendCommand and executes it. If we don't mock the command, we would be sending actual messages. Therefore we use a provider, and we mock it so that it returns a mocked command.
+    // When
+    [sut sendMessage:@"this is a test" toUser:someUser];
+
+    // Then
+    [[mockCommand shouldReceive] command];
+}
+```
+As you can see, we have fixed both problems: we can easily replace our class with a mock and our SUT doesn't depend on our class' dependencies, just on the provider.
