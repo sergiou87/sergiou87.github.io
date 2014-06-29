@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Dependency Injection: Providers"
-date:   2014-05-?? 23:29:54
+date:   2014-06-29 21:00:54
 categories: testing
 ---
 
@@ -25,9 +25,9 @@ A _provider_ is just an intermediate class whose purpose is instantiating object
 
 ## Example
 
-Continuing with the example of the previous post, imagine our ``SPTwitterMessageSender`` implementation relays on some ``SPTwitterMessageSendCommand`` which actually do the sending work.
+Continuing with the example of the previous post, imagine our ``SPTwitterMessageSender`` implementation relays on some ``SPTwitterMessageSendCommand`` which actually does the sending work.
 
-Whenever we want to tweet a message, our _sender_ will have to instance a _command_ and execute it. This commands will require access to the Twitter client in order to tweet the desired messages.
+Whenever we want to tweet a message, our _sender_ will have to instance a _command_ and execute it. These command instances will require access to the Twitter client in order to tweet the desired messages.
 ```objective-c
 @interface SPTwitterMessageSender <SPMessageSending>
 
@@ -109,7 +109,21 @@ If we want to test if a command is executed, we can write it like this:
     [sut sendMessage:@"this is a test" toUser:someUser];
 
     // Then
-    [[mockCommand shouldReceive] command];
+    [[mockCommand shouldReceive] execute];
 }
 ```
 As you can see, we have fixed both problems: we can easily replace our class with a mock and our SUT doesn't depend on our class' dependencies, just on the provider.
+
+## Providers with Typhoon
+
+My friend and code wizard [Daniel Rodríguez Troitiño](https://github.com/drodriguez) developed, while we were working at [Tuenti](http://www.tuenti.com), a very useful addition to [Typhoon](http://www.typhoonframework.org/): the ```TyphoonFactoryProvider```.
+
+This class uses the runtime toolbox to implement these providers from the assembly file used by Typhoon, you don't need to manually inject the dependencies nor write the implementation of the factory method.
+
+You only need to provide a protocol (the interface of your provider, with the factory method and the dependencies) and a block with the implementation of the factory method. That's all!
+
+## Conclusion
+
+Object instantiation can easily become a [seam](http://c2.com/cgi/wiki?SoftwareSeam) by just creating an object _provider_ whose only purpose is allocating the actual object.
+
+Combining these providers with *dependency injection* (AKA making your dependencies explicit), it's really straightforward to replace that provider (and the provided object) in a test while keeping our classes loosely coupled.
