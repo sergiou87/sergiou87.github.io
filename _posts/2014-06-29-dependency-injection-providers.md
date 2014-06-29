@@ -32,19 +32,19 @@ Whenever we want to tweet a message, our _sender_ will have to instance a _comma
 ```objective-c
 @interface SPTwitterMessageSender <SPMessageSending>
 
-    // Dependencies
-    @property (nonatomic, strong) TWTwitterClient *twitterClient;
+// Dependencies
+@property (nonatomic, strong) TWTwitterClient *twitterClient;
 
 @end
 
 @implementation SPTwitterMessageSender
 
-    - (void)sendMessage:(NSString *)aMessage toUser:(FVUser *)user
-    {
-        SPTwitterMessageSendCommand *command = [[SPTwitterMessageSendCommand alloc] initWithTwitterClient:self.twitterClient];
+- (void)sendMessage:(NSString *)aMessage toUser:(FVUser *)user
+{
+    SPTwitterMessageSendCommand *command = [[SPTwitterMessageSendCommand alloc] initWithTwitterClient:self.twitterClient];
 
-        [command execute];
-    }
+    [command execute];
+}
 
 @end
 ```
@@ -65,10 +65,10 @@ Let's see how to implement a _provider_ for ``SPTwitterMessageSendCommand``:
 
 @implementation SPTwitterMessageSendCommandProvider
 
-    - (SPTwitterMessageSendCommand *)command
-    {
-        return [[SPTwitterMessageSendCommand alloc] initWithTwitterClient:self.twitterClient];
-    }
+- (SPTwitterMessageSendCommand *)command
+{
+    return [[SPTwitterMessageSendCommand alloc] initWithTwitterClient:self.twitterClient];
+}
 
 @end
 ```
@@ -80,19 +80,19 @@ Now let's see how it's used in ``SPTwitterMessageSender``:
 ```objective-c
 @interface SPTwitterMessageSender <SPMessageSending>
 
-    // Dependencies
-    @property (nonatomic, strong) SPTwitterMessageSendCommandProvider *twitterMessageSendCommandProvider;
+// Dependencies
+@property (nonatomic, strong) SPTwitterMessageSendCommandProvider *twitterMessageSendCommandProvider;
 
 @end
 
 @implementation SPTwitterMessageSender
 
-    - (void)sendMessage:(NSString *)aMessage toUser:(FVUser *)user
-    {
-        SPTwitterMessageSendCommand *command = [self.twitterMessageSendCommandProvider command];
+- (void)sendMessage:(NSString *)aMessage toUser:(FVUser *)user
+{
+    SPTwitterMessageSendCommand *command = [self.twitterMessageSendCommandProvider command];
 
-        [command execute];
-    }
+    [command execute];
+}
 
 @end
 ```
