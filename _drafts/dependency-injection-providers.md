@@ -15,13 +15,13 @@ One approach would be overriding/swizzling somehow the ``alloc`` method of ``B``
 
 However, even if we managed to make this work, we would have to face another problem: class ``B`` may have other dependencies. If this is the case… should ``A`` receive all the dependencies of ``B`` so that they can be injected into ``B``? That would mean making ``A`` depend on stuff that it doesn't need, and therefore couples ``A`` to ``B``'s implementation.
 
-**DIAGRAM 1**
+![A depends on B's dependencies](dependency-injection-providers/ProvidersBAD.png)
 
 Therefore, if we discard replacing the implementation of ``alloc`` and we don't want to propagate our dependencies through our classes, we only can abstract object instantiation using _providers_.
 
 A _provider_ is just an intermediate class whose purpose is instantiating objects. That means that it's also its duty to store and inject the dependencies of the created objects.
 
-**DIAGRAM 2**
+![A depends on B's provider](dependency-injection-providers/ProvidersGOOD.png)
 
 ## Example
 
