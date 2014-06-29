@@ -28,72 +28,79 @@ A _provider_ is just an intermediate class whose purpose is instantiating object
 Continuing with the example of the previous post, imagine our ``SPTwitterMessageSender`` implementation relays on some ``SPTwitterMessageSendCommand`` which actually does the sending work.
 
 Whenever we want to tweet a message, our _sender_ will have to instance a _command_ and execute it. These command instances will require access to the Twitter client in order to tweet the desired messages.
+
 ```objective-c
 @interface SPTwitterMessageSender <SPMessageSending>
 
-// Dependencies
-@property (nonatomic, strong) TWTwitterClient *twitterClient;
+    // Dependencies
+    @property (nonatomic, strong) TWTwitterClient *twitterClient;
 
 @end
 
 @implementation SPTwitterMessageSender
 
-- (void)sendMessage:(NSString *)aMessage toUser:(FVUser *)user
-{
-    SPTwitterMessageSendCommand *command = [[SPTwitterMessageSendCommand alloc] initWithTwitterClient:self.twitterClient];
+    - (void)sendMessage:(NSString *)aMessage toUser:(FVUser *)user
+    {
+        SPTwitterMessageSendCommand *command = [[SPTwitterMessageSendCommand alloc] initWithTwitterClient:self.twitterClient];
 
-    [command execute];
-}
+        [command execute];
+    }
 
 @end
 ```
+
 This makes ``SPTwitterMessageSender`` depend on ``TWTwitterClient`` just for injecting it in the command instances. If we wanted to change ``SPTwitterMessageSendCommand`` to relay on some custom ``SPMyOwnTwitterClient`` we would be forced to change ``SPTwitterMessageSender``, which makes no sense.
 
 Let's see how to implement a _provider_ for ``SPTwitterMessageSendCommand``:
+
 ```objective-c
 @interface SPTwitterMessageSendCommandProvider
 
-// Dependencies
-@property (nonatomic, strong) TWTwitterClient *twitterClient;
+    // Dependencies
+    @property (nonatomic, strong) TWTwitterClient *twitterClient;
 
-- (SPTwitterMessageSendCommand *)command;
+    - (SPTwitterMessageSendCommand *)command;
 
 @end
 
 @implementation SPTwitterMessageSendCommandProvider
 
-- (SPTwitterMessageSendCommand *)command
-{
-    return [[SPTwitterMessageSendCommand alloc] initWithTwitterClient:self.twitterClient];
-}
+    - (SPTwitterMessageSendCommand *)command
+    {
+        return [[SPTwitterMessageSendCommand alloc] initWithTwitterClient:self.twitterClient];
+    }
 
 @end
 ```
+
 It's as simple as that.
 
 Now let's see how it's used in ``SPTwitterMessageSender``:
+
 ```objective-c
 @interface SPTwitterMessageSender <SPMessageSending>
 
-// Dependencies
-@property (nonatomic, strong) SPTwitterMessageSendCommandProvider *twitterMessageSendCommandProvider;
+    // Dependencies
+    @property (nonatomic, strong) SPTwitterMessageSendCommandProvider *twitterMessageSendCommandProvider;
 
 @end
 
 @implementation SPTwitterMessageSender
 
-- (void)sendMessage:(NSString *)aMessage toUser:(FVUser *)user
-{
-    SPTwitterMessageSendCommand *command = [self.twitterMessageSendCommandProvider command];
+    - (void)sendMessage:(NSString *)aMessage toUser:(FVUser *)user
+    {
+        SPTwitterMessageSendCommand *command = [self.twitterMessageSendCommandProvider command];
 
-    [command execute];
-}
+        [command execute];
+    }
 
 @end
 ```
+
 Now ``SPTwitterMessageSender`` depends only on the _provider_ and not on ``SPTwitterMessageSendCommand`` dependencies.
 
 If we want to test if a command is executed, we can write it like this:
+
 ```objective-c
 - (void)testSendMessageShouldExecuteCommand
 {
@@ -112,6 +119,7 @@ If we want to test if a command is executed, we can write it like this:
     [[mockCommand shouldReceive] execute];
 }
 ```
+
 As you can see, we have fixed both problems: we can easily replace our class with a mock and our SUT doesn't depend on our class' dependencies, just on the provider.
 
 ## Providers with Typhoon
