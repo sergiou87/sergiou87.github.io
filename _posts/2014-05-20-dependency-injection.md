@@ -28,7 +28,7 @@ However, the way it sends the message to his friends is defined by the following
 @end
 ```
 
-We could have something like **FVEmailMessageSending** and **FVTwitterMessageSending**, which are different implementations that send the message to the e-mail address or the Twitter account of these users, respectively.
+We could have something like **FVEmailMessageSender** and **FVTwitterMessageSender**, which are different implementations that send the message to the e-mail address or the Twitter account of these users, respectively.
 
 If we take a look to the whole code of **FVBroadcaster** we can see a **FVMessageSending** object as a dependency:
 
@@ -48,7 +48,7 @@ If we take a look to the whole code of **FVBroadcaster** we can see a **FVMessag
 {
     …
     // Twitter or e-mail?
-    _messageSending = [[FV______MessageSending alloc] init];
+    _messageSending = [[FV______MessageSender alloc] init];
     …
 }
 
