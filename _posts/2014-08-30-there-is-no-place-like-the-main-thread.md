@@ -2,7 +2,7 @@
 layout: post
 title:  "There's no place like the main thread"
 date:   2014-08-30 00:50:54
-categories: programming
+categories: programming ios
 ---
 
 In my experience as iOS developer, I've seen some inclination to do lots of things in separate threads just for the sake of performance and to avoid blocking the UI thread.

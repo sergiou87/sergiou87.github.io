@@ -2,7 +2,7 @@
 layout: post
 title:  "Dependency Injection"
 date:   2014-05-20 23:29:54
-categories: di testing engineering
+categories: programming testing ios
 ---
 
 Dependency Injection is not a complex concept.

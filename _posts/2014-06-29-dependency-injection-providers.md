@@ -2,7 +2,7 @@
 layout: post
 title:  "Dependency Injection: Providers"
 date:   2014-06-29 21:00:54
-categories: testing
+categories: programming testing ios
 ---
 
 In the last post I introduced Dependency Injection as a way to decouple a class from the specific implementation of its dependencies. This way, we could replace those dependencies with mocks in a unit test.
