@@ -41,5 +41,6 @@ That's why I decided to report the bug in [Open Radar](http://openradar.io) and 
 
 ![Drawing Circles demo app](/public/drawing-circles/flatness-demo-app.gif)
 
-**Demo app:** https://github.com/sergiou87/DrawingCircles
-**Open Radar bug report:** http://openradar.io/23784682
+Take a look at the source code and bug report in the following links:
+[Demo app repository](https://github.com/sergiou87/DrawingCircles)
+[Open Radar bug report](http://openradar.io/23784682)
