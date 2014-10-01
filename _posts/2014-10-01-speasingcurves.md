@@ -13,4 +13,4 @@ It's based on the easing curves from [easings.net](http://easings.net) and it wo
 
 ![SPEasingCurves example](https://raw.github.com/sergiou87/SPEasingCurves/master/SPEasingCurvesExample/example.gif)
 
-If you want to use it with **Pop**, you'll probably need at least **1.0.7** version, which includes [a fix I submitted](https://github.com/facebook/pop/pull/141) for timing functions that exceeds 1.0 that made the animation to stop prematurely.
+If you want to use it with **Pop**, you'll probably need at least **1.0.7** version, which includes [a fix I submitted](https://github.com/facebook/pop/pull/141) for timing functions that exceed 1.0 that made the animation to stop prematurely.
