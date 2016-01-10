@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Apple TV Tech Talks - London 2016"
-date:   2016-09-01 23:43:04
+date:   2016-01-09 23:43:04
 categories: programming tvos apple tech talks
 ---
 

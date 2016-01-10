@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Apple TV talk in Karumi HQ"
-date:   2016-10-01 10:43:04
+date:   2016-01-10 10:43:04
 categories: programming tvos apple tv plex karumi talk
 ---
 
